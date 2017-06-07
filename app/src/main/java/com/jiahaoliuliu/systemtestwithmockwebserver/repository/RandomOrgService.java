@@ -13,5 +13,5 @@ import retrofit2.http.POST;
 public interface RandomOrgService {
 
     @POST("json-rpc/1/invoke")
-    Call<RequestModel> createUser(@Body RequestModel requestModel);
+    Call<RequestModel> getRandomNumber(@Body RequestModel requestModel);
 }

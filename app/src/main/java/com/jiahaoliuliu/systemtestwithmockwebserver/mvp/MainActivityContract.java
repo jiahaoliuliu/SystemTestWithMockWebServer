@@ -15,6 +15,14 @@ public class MainActivityContract {
     }
 
     public interface Model {
-        int generateNewNumber();
+        void generateNewNumber(NumberGenerationCallback numberGenerationCallback);
+    }
+
+    public interface NumberGenerationCallback {
+        // If the data was correctly received
+        void onSuccess(int numNumber);
+
+        // If there were some error receiving the data
+        void onFailure();
     }
 }

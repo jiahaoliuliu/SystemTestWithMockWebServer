@@ -1,5 +1,7 @@
 package com.jiahaoliuliu.systemtestwithmockwebserver.repository.request;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by jiahaoliu on 6/7/17.
  */
@@ -17,13 +19,17 @@ package com.jiahaoliuliu.systemtestwithmockwebserver.repository.request;
 //}
 public class RequestModel {
 
+    @SerializedName("id")
     private int id = 42;
+    @SerializedName("jsonrpc")
     private String jsonrpc = "2.0";
+    @SerializedName("method")
     private String method = "generateIntegers";
+    @SerializedName("params")
     private Params params;
 
-    public RequestModel(Params params) {
-        this.params = params;
+    public RequestModel(int numberOfData, int minValue, int maximumValue) {
+        this.params = new Params(numberOfData, minValue, maximumValue);
     }
 
     public Params getParams() {

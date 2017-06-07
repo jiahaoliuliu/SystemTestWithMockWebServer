@@ -14,37 +14,37 @@ import com.jiahaoliuliu.systemtestwithmockwebserver.ApiKeys;
  */
 public class Params {
     private String apiKey = ApiKeys.RANDOM_ORG;
-    private String n;
-    private String min;
-    private String max;
+    private int n;
+    private int min;
+    private int max;
 
-    public Params(String n, String min, String max) {
+    public Params(int n, int min, int max) {
         this.n = n;
         this.min = min;
         this.max = max;
     }
 
-    public String getN() {
+    public int getN() {
         return n;
     }
 
-    public void setN(String n) {
+    public void setN(int n) {
         this.n = n;
     }
 
-    public String getMin() {
+    public int getMin() {
         return min;
     }
 
-    public void setMin(String min) {
+    public void setMin(int min) {
         this.min = min;
     }
 
-    public String getMax() {
+    public int getMax() {
         return max;
     }
 
-    public void setMax(String max) {
+    public void setMax(int max) {
         this.max = max;
     }
 
@@ -55,26 +55,26 @@ public class Params {
 
         Params params = (Params) o;
 
-        if (n != null ? !n.equals(params.n) : params.n != null) return false;
-        if (min != null ? !min.equals(params.min) : params.min != null) return false;
-        return max != null ? max.equals(params.max) : params.max == null;
+        if (n != params.n) return false;
+        if (min != params.min) return false;
+        return max == params.max;
 
     }
 
     @Override
     public int hashCode() {
-        int result = n != null ? n.hashCode() : 0;
-        result = 31 * result + (min != null ? min.hashCode() : 0);
-        result = 31 * result + (max != null ? max.hashCode() : 0);
+        int result = n;
+        result = 31 * result + min;
+        result = 31 * result + max;
         return result;
     }
 
     @Override
     public String toString() {
         return "Params{" +
-                "n='" + n + '\'' +
-                ", min='" + min + '\'' +
-                ", max='" + max + '\'' +
+                "n=" + n +
+                ", min=" + min +
+                ", max=" + max +
                 '}';
     }
 }

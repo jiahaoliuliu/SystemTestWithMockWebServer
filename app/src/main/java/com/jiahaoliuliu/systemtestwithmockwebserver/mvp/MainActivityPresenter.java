@@ -18,7 +18,16 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
 
     @Override
     public void getNewNumber() {
-        int newNumber = mModel.generateNewNumber();
-        mView.showNumber(newNumber);
+        mModel.generateNewNumber(new MainActivityContract.NumberGenerationCallback() {
+            @Override
+            public void onSuccess(int newNumber) {
+                mView.showNumber(newNumber);
+            }
+
+            @Override
+            public void onFailure() {
+                // TODO: Show error
+            }
+        });
     }
 }
