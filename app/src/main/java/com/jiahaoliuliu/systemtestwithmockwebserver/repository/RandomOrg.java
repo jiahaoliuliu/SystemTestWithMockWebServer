@@ -11,13 +11,14 @@ public class RandomOrg {
 
     private RandomOrgService mRandomOrgService;
 
+    // Two different endpoints. One for production and one for functional test
     private static final String PROD_END_POINT = "https://api.random.org";
     private static final String QA_END_POINT = "http://localhost:4444";
 
 
     public RandomOrg() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(PROD_END_POINT)
+                .baseUrl(QA_END_POINT)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

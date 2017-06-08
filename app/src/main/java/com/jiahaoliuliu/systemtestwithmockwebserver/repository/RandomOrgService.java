@@ -13,6 +13,8 @@ import retrofit2.http.POST;
 
 public interface RandomOrgService {
 
-    @POST("/json-rpc/1/invoke")
+    String REQUEST_RANDOM_NUMBER_URL = "/json-rpc/1/invoke";
+
+    @POST(REQUEST_RANDOM_NUMBER_URL)
     Call<ResponseModel> getRandomNumber(@Body RequestModel requestModel);
 }

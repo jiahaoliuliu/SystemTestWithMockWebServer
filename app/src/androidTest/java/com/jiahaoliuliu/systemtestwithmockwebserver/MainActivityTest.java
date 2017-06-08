@@ -5,6 +5,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
 import com.jiahaoliuliu.systemtestwithmockwebserver.mvp.MainActivity;
+import com.jiahaoliuliu.systemtestwithmockwebserver.repository.RandomOrgService;
 
 import org.junit.After;
 import org.junit.Before;
@@ -26,12 +27,13 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withHint;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 import static org.hamcrest.Matchers.not;
 
 /**
  * Created by jiahaoliu on 6/8/17.
  */
-
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
 
@@ -91,6 +93,15 @@ public class MainActivityTest {
                 .check(matches(withText("0")));
     }
 
+    /**
+     * Testing the interface, along with the backend calls. In this case we use MockWebServer to
+     * mock the backend response, as well as to capture the requests and check if they are correct.
+     *
+     * TODO: In order to make it work, change the variable at {@link com.jiahaoliuliu.systemtestwithmockwebserver.repository.RandomOrg
+     * from PROD_END_POINT to QA_END_POINT}
+     *
+     * @throws Exception
+     */
     @Test
     public void testRequestingNewNumber() throws Exception{
         onView(withId(R.id.number_tv))
@@ -99,12 +110,11 @@ public class MainActivityTest {
 
         // Getting request from the server
         RecordedRequest request1 = mMockWebServer.takeRequest();
-        Log.d(TAG, "The first request is " + request1 + ", Path: " + request1.getPath() +
-                ", header: " + request1.getHeaders() + ", Body: " + request1.getBody().readUtf8());
+        assertEquals(RandomOrgService.REQUEST_RANDOM_NUMBER_URL, request1.getPath());
+        assertEquals("application/json; charset=UTF-8", request1.getHeader("Content-Type"));
 
-        HttpUrl httpUrl = mMockWebServer.url("");
-
-        Log.d(TAG, "The base http url is " + httpUrl.toString());
+        // Wait for the backend response
+        Thread.sleep(2*1000);
 
         onView(withId(R.id.number_tv))
                 .check(matches(not(withText("0"))));

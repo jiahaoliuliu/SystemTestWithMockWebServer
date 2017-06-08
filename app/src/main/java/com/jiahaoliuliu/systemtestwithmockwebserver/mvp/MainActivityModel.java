@@ -41,7 +41,6 @@ public class MainActivityModel implements MainActivityContract.Model {
                 if(response.isSuccessful()) {
                     Log.i(TAG, "post submitted to API." + response.body().toString());
                     ResponseModel responseModel = response.body();
-
                     numberGenerationCallback.onSuccess(responseModel.getResult().getRandom().getData()[0]);
                 }
             }
