@@ -8,6 +8,7 @@ public class MainActivityContract {
 
     public interface View {
         void showNumber(int number);
+        void showError(String errorMessage);
     }
 
     public interface Presenter {

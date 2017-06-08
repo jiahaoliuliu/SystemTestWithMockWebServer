@@ -29,6 +29,11 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
 
+    // The mock for retrofit
+    testCompile ("com.squareup.retrofit:retrofit-mock:1.9.0") {
+        exclude group: 'com.squareup.retrofit', module: 'retrofit'
+    }
+
     testCompile 'junit:junit:4.12'
 
     androidTestCompile ('com.android.support.test.espresso:espresso-core:2.2.2') {

@@ -11,9 +11,13 @@ public class RandomOrg {
 
     private RandomOrgService mRandomOrgService;
 
+    private static final String PROD_END_POINT = "https://api.random.org";
+    private static final String QA_END_POINT = "http://localhost:4444";
+
+
     public RandomOrg() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.random.org/")
+                .baseUrl(PROD_END_POINT)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

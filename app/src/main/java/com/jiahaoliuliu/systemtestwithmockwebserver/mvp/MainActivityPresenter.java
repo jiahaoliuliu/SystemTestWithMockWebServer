@@ -26,7 +26,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
 
             @Override
             public void onFailure() {
-                // TODO: Show error
+                mView.showError("Error retrieving the number");
             }
         });
     }

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.jiahaoliuliu.systemtestwithmockwebserver.repository.RandomOrg;
 import com.jiahaoliuliu.systemtestwithmockwebserver.repository.request.RequestModel;
+import com.jiahaoliuliu.systemtestwithmockwebserver.repository.response.ResponseModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,21 +31,24 @@ public class MainActivityModel implements MainActivityContract.Model {
                 NUMBER_OF_DATA_RETURNED, MINIMUM_VALUE, MAXIMUM_VALUE);
     }
 
-    // TODO: Request the data to the repository
     @Override
     public void generateNewNumber(final MainActivityContract.NumberGenerationCallback numberGenerationCallback) {
         Log.v(TAG, "Request model " + mRequestModel);
-        mRandomOrg.getRandomOrgService().getRandomNumber(mRequestModel).enqueue(new Callback<RequestModel>() {
+
+        mRandomOrg.getRandomOrgService().getRandomNumber(mRequestModel).enqueue(new Callback<ResponseModel>() {
             @Override
-            public void onResponse(Call<RequestModel> call, Response<RequestModel> response) {
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 if(response.isSuccessful()) {
                     Log.i(TAG, "post submitted to API." + response.body().toString());
-                    numberGenerationCallback.onSuccess(42);
+                    ResponseModel responseModel = response.body();
+
+                    numberGenerationCallback.onSuccess(responseModel.getResult().getRandom().getData()[0]);
                 }
             }
 
             @Override
-            public void onFailure(Call<RequestModel> call, Throwable t) {
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
+                Log.i(TAG, "Failed to request random number to the backend.");
                 numberGenerationCallback.onFailure();
             }
         });

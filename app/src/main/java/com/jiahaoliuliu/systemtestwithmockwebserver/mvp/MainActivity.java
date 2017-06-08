@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jiahaoliuliu.systemtestwithmockwebserver.R;
 
@@ -35,5 +36,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     @Override
     public void showNumber(int number) {
         mNumberTv.setText(String.valueOf(number));
+    }
+
+    @Override
+    public void showError(String errorMessage) {
+        Toast.makeText(MainActivity.this, errorMessage, Toast.LENGTH_LONG).show();
     }
 }
